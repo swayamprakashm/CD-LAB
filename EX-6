@@ -1,0 +1,63 @@
+6.	Implement Type Checking.
+Aim:
+to write a C program to implement type checking. Algorithm:
+Step-1: Track the global scope type information. Step-2: Determine the type of expression.
+Step-3: if type found correct, do the operation
+Step-4: Type mismatches, semantic error will be notified.
+Program Code:
+#include<stdio.h> #include<stdlib.h> int main()
+{
+int n,i,k,flag=0;
+char var[15],type[15],b[15],c; printf("enter the no.of variables"); scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+flushall();
+printf("enter the variable[%d]:",i); scanf("%c",&var[i]);
+flushall();
+printf("Enter the variable -type[%d](float-f, int-i):",i); scanf("%c",&type[i]);
+if(type[i]=='f')
+ 
+
+
+
+flag=1;
+}
+printf("enter the expression(end with $):"); i=0;
+getchar(); while((c=getchar())!='$')
+{
+b[i]=c; i++;
+}
+k=i; for(i=0;i<k;i++)
+{
+if (b[i]=='/')
+{
+flag=1; break;
+}
+}
+for (i=0;i<n;i++)
+{
+if(b[0]==var[i])
+{
+if(flag==1)
+{
+if (type[i]=='f')
+{
+printf("\	\n");
+break;
+}
+else
+{
+\n",var[i]);
+break;
+}
+}
+else
+{
+printf("\	\n");
+break;
+}
+}
+}
+return 0;
+}
+OUT PUT:
