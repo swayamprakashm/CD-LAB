@@ -1,0 +1,97 @@
+11.	write a recursive descent parser for the grammar:
+ 
+S  (L)	S
+Steps:
+ 
+L  L,S	L S
+ 
+1.	It repeatedly scans the input until we locate the right path.
+2.	The following qualities of the grammar must be present in order to create a recursive descent parser:
+3.	It shouldn't be allowed to repeat.
+4.	It needs to be left-factored. Alternatives shouldn't share a prefix.
+5.	Recursion should be possible in languages.
+ 
+
+
+
+6.	Backtracking will be required by the recursive descent parser if the grammar is not left-factored.
+
+Given Grammar:
+
+#include <stdio.h> #include <string.h> #define SUCCESS 1
+#define FAILED 0 int S(), L(), Ldash(); const char *cursor; char string[64];
+int main()
+{
+puts("Enter the string");
+// scanf("%s", string); sscanf("(a,a,a)", "%s", string); cursor = string;
+puts("");
+puts("Input	Action");
+puts("	");
+if (S() && *cursor == '\0') {
+puts("	");
+puts("String is successfully parsed"); return 0;
+} else {
+puts("	");
+puts("Error in parsing String"); return 1;
+}
+}
+
+int S()
+{
+printf("%-16s S   ( L )'\n", cursor);
+
+printf("%-16s S ( L )\n", cursor); cursor++;
+L();
+{
+Cursor++;
+return SUCCESS;
+}
+else
+ 
+
+
+
+return FAILED;
+} else
+{
+Cursor++;
+return SUCCESS;
+}
+}
+int L()
+{
+Printf("%-16s L \n", cursor); if (S()) {
+if(Ldash()
+return SUCCESS; else
+return FAILED;
+}
+else
+return FAILED;
+}
+
+int Ldash()
+{
+if (*cursor == ',') {
+printf("%-16s L' -     \n", cursor); cursor++;
+if (S()) {
+if (Ldash()) return SUCCESS; else
+return FAILED;
+} else
+return FAILED;
+} else {
+printf("%-16s L' -> $\n", cursor); return SUCCESS;
+}
+}
+
+Output:
+Input	Action
+
+( a, a,a)	S   ( L )
+a,a,a	L 
+a,a,a	S   a
+,a,a a,a
+
+a	S	a
+ $
+
+The string is successfully parsed.
