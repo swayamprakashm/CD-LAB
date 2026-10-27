@@ -1,0 +1,74 @@
+8.	a) Lex Program to count the numbers of lines, words, spaces, and characters in a given statement
+
+/*Lex Program to count numbers of lines, words, spaces and characters in a given statement*/
+%{
+#include<stdio.h>
+int sc=0,wc=0,lc=0,cc=0;
+%}
+%%
+[\n] { lc++; cc+=yyleng;} [ \t] { sc++; cc+=yyleng;}
+[^\t\n ]+ { wc++; cc+=yyleng;}
+%%
+int main(int argc ,char* argv[ ])
+{
+printf("Enter the input:\n"); yylex();
+printf("The number of lines=%d\n",lc); printf("The number of spaces=%d\n",sc);
+ 
+
+
+
+printf("The number of words=%d\n",wc); printf("The number of characters are=%d\n",cc);
+}
+
+int yywrap( )
+{
+return 1;
+}
+Compiletion:
+$ lex ch_count.l
+$ gcc lex.yy.c Execution: $ ./a.out Input:
+Enter the input: Greetings from IT Dept Welcome to ACE Engineering College Lex Yacc Tutorial
+Out put:
+The number of lines=3 The number of spaces=8 The number of words=12
+The number of characters are=90
+
+8.b)Program to count the numbers of lines, words, spaces, and characters from a given file
+%{
+#include<stdio.h>
+int sc=0,wc=0,lc=0,cc=0;
+%}
+%%
+[\n] { lc++; cc+=yyleng;} [ \t] { sc++; cc+=yyleng;}
+[^\t\n ]+ { wc++; cc+=yyleng;}
+%%
+int main(int argc ,char* argv[])
+{
+if(argc==2)
+{
+ 
+
+}
+else
+{
+
+
+}
+ 
+yyin=fopen(argv[1],"r");
+
+
+
+printf("Enter the input\n"); yyin=stdin;
+ 
+yylex();
+printf("The number of lines=%d\n",lc); printf("The number of spaces=%d\n",sc); printf("The number of words=%d\n",wc); printf("The number of characters are=%d\n",cc);
+}
+int yywrap( )
+{
+return 1;
+
+
+Out put:
+
+The number of lines=3 The number of spaces=8 The number of words=12
+The number of characters are=90
