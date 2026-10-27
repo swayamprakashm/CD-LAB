@@ -1,0 +1,35 @@
+2.	Develop a Lexical Analyzer to recognize a few patterns inc.(Identifiers, Constants, Comments, Operators etc.))
+/*lex code to determine whether input is an identifier or not*/
+%{
+#include <stdio.h>
+%}
+
+%%
+
+
+/* identifying Comments*/
+
+-zA-Z0-
+/* regex for Constants */ [0- 
+[0-9]+.[0-
+[a-z]|[A-
+[a-zA-Z0-
+
+/* regex for valid identifiers */
+^[a - z A - Z _][a - z A - Z 0 - 9 _] * printf("Valid Identifier");
+
+/* regex for invalid identifiers*/
+^[^a - z A - Z _] printf("Invalid Identifier");
+
+%%
+
+int main()
+{
+ 
+yylex(); return 0;
+}
+
+Void yywrap()
+{
+return 1;
+}
