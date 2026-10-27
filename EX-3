@@ -1,0 +1,50 @@
+3.	Implementation Of A Lexical Analyzer Using Lex (With Output)
+AIM:
+ 
+
+
+
+To write a program for implementing a Lexical analyser using LEX tool in Linux platform.
+ALGORITHM:
+Step1: In declaration section define COMMENT variable as 0. Step2: Assign Name for Identifier pattern
+Step3: start the rule section. Step4: define pattern for keywords
+Step 5: define pattern for Comment begin Step 6: define pattern for BLOCK Begin Step7: define pattern for BLOCK End Step8:define pattern for NUMBER Step9: define pattern for parenthesis Step10: pattern for Assignment operator Step 11: pattern for semicolon Step12:pattern for relational operators Step13: pattern for Preprocessor.
+Step 14 : end of the rule section Step 15: define main () function Step 16: define yywrap() function.
+Program Code:
+/* implementation of Lexical Analyzer using Lex Tool*/
+%{
+int COMMENT=0;
+%}
+Identifier [a-zA-Z][a-zA-Z0-9]*
+%%
+int|float|char|double|while|for|struct|typedef|do|if {printf("\n %s is a keyword",yytext);} "/*" {COMMENT=1;printf("\n\t %s is a COMMENT",yytext);}
+{Identifier} {if(!COMMENT) printf("\n%s :Identifier\n",yytext);}
+\{ {if(!COMMENT) printf("\n BLOCK BEGINS");}
+\} {if(!COMMENT) printf("\n BLOCK END");}
+[0-9]+ {if(!COMMENT) printf("\n%s is a NUMBER",yytext);}
+\)(\:)? {if(!COMMENT) printf("\n"); ECHO; printf("\n");}
+\(ECHO;
+= {if(!COMMENT) printf("\n %s is an ASSIGNMENT OPERATOR",yytext);} ";" {printf("\n%s end of the statement",yytext);}
+\<=|\>=|\<|==|\> {if(!COMMENT) printf("\n \t %s is a RELATIONAL OPERATOR",yytext);} #.* {printf("\n %s is a preprocessor directive",yytext);}
+%%
+int main(int argc,char **argv)
+{
+FILE *fp; fp=fopen("wel.c","r"); if(!fp)
+{
+ 
+
+
+
+printf("cloud not open the fle"); exit(0);
+}
+yyin=fp; yylex(); printf("\n"); return 0;
+}
+int yywrap()
+{
+return 1;
+} INPUT:
+//var.c #include<stdio.h> void main()
+{
+int a,b,c; a=1;b=2;
+c=a+b;
+}
