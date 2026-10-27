@@ -1,0 +1,111 @@
+9.	Write A C-Program To Implement Lexical Analysis.
+
+AIM : To write a program to implement Lexical Analysis using C. ALGORITHM:
+Step 1 : Start the program
+Step 2 : Include necessary header files.
+Step 3: The ctype header file is to load the file with predicate, isdigit. Step 4 : The define directive defines the buffer size, numerics, assignment operator, relational operator.
+Step 5 : Initialize the necessary variables.
+Step 6: To return index of new string S, token t using insert() function.
+Step 7 : Initialize the length of every string. Step 8: Check the necessary condition.
+Step 9: Call the initialize() function. This function loads the keywords into the symbol table.
+Step 10 : Check the conditions such as white spaces, digits, letters and alphanumerics.
+Step 11 : To return index of entry for string S, or 0 if S is not found using lookup( ) function.
+Step 12 : Check this until EOF is found.
+Step 13 : Otherwise initialize the token value to be none.
+Step 14 : In the main function if lookahead equals numeric then the value of attribute num is given by the global variable tokenval.
+Step 15 : Check the necessary conditions such as arithmetic operators , parenthesis , identifiers, assignment operators and relational operators.
+Step 16 : Stop the program.
+
+
+/*STANDALONE SCANNER PROGRAM*/
+
+#include<stdio.h> #include<ctype.h> #include<string.h> int main()
+{
+FILE *fp1,*fp2;
+int l=1,t=0,j=0,i,flag; char ch,str[20];
+char keyword[30][30] = {"int","float","if","else","do","while"}; fp1=fopen("input.txt","r");
+ 
+
+
+
+fp2=fopen("output.txt","w"); if(fp1==NULL)
+{
+printf("file is not existed"); exit(0);
+
+}
+fprintf(fp2,"Line no. \t Token no. \t Token \t Lexeme\n\n"); while(!feof(fp1))
+{ i=0;
+flag=0; ch=fgetc(fp1);
+if( ch=='+' || ch== '-' || ch=='*' || ch=='/' )
+{
+fprintf(fp2,"%7d\t\t %7d\t\t Operator\t %7c\n",l,t,ch); t++;
+}
+else if( ch==';' || ch=='{' || ch=='}' || ch=='(' || ch==')' || ch=='?' || ch=='@' || ch=='!' ||
+ch=='%')
+{
+fprintf(fp2,"%7d\t\t %7d\t\t Special symbol\t %7c\n",l,t,ch); t++;
+}
+else if(isdigit(ch))
+{
+fprintf(fp2,"%7d\t\t %7d\t\t Digit\t\t %7c\n",l,t,ch); t++;
+}
+else if(isalpha(ch))
+{
+str[i]=ch; i++;
+ch=fgetc(fp1); while(isalnum(ch) && ch!=' ')
+{
+str[i]=ch; i++;
+ch=fgetc(fp1);
+}
+str[i]='\0'; for(j=0;j<=5;j++)
+{
+if(strcmp(str,keyword[j])==0)
+{
+flag=1; break;
+}
+}
+if(flag==1)
+{
+fprintf(fp2,"%7d\t\t %7d\t\t Keyword\t %7s\n",l,t,str);
+ 
+
+
+
+t++;
+}
+else
+{
+fprintf(fp2,"%7d\t\t %7d\t\t Identifier\t %7s\n",l,t,str); t++;
+}
+}
+else if(ch=='\n')
+{ l++;
+}
+else if(ch=='#')
+{
+fprintf(fp2,"%7d\t\t %7d\t\t preprossesor\t %7c\n",l,t,ch); t++;
+}
+}
+fclose(fp1); fclose(fp2); return 0;
+}
+Input:
+//input.txt #include<stdio.h> void main()
+{
+printf("Hello World");
+}
+Output:
+//output.txt
+Line no. Token no. Token Lexeme
+1		0	Identifier include
+1	1		Identifier stdio
+1	2		Identifier h
+2	3		Identifier void
+2	4		Keyword main
+2	5		Special symbol )
+3	6		Special symbol {
+4	7		Identifier printf
+4	8		Identifier Hello
+4	9		Identifier World
+4	10		Special symbol )
+4	11		Special symbol ;
+5	12		Special symbol }
