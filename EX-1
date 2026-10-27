@@ -1,0 +1,70 @@
+1.Implementation Of Symbol Table Using C (With Output)
+AIM:
+To write a program for implementing Symbol Table using C.
+ALGORITHM:
+Step1: Start the program for performing insert, display, delete, search and modify option in symbol table
+Step2: Define the structure of the Symbol Table
+Step3: Enter the choice for performing the operations in the symbol Table
+Step4: If the entered choice is 1, search the symbol table for the symbol to be inserted. If the symbol is
+the symbol table.
+Step5: If the entered choice is 2, the symbols present in the symbol table are displayed.
+Step6: If the entered choice is 3, the symbol to be deleted is searched in the symbol table.
+Step7:
+Step8: If the entered choice is 5, the symbol to be modified is searched in the symbol table.
+PROGRAM CODE:
+//Implementation of symbol table
+#include<stdio.h>
+#include<ctype.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+void main()
+{
+int i=0,j=0,x=0,n;
+void *p,*add[5];
+char ch,srch,b[15],d[15],c;
+printf("Expression terminated by $:");
+while((c=getchar())!='$')
+{
+b[i]=c;
+i++;
+}
+n=i-1;
+printf("Given Expression:");
+i=0;
+while(i<=n)
+{
+Page 16
+printf("%c",b[i]);
+i++;
+}
+printf("\n\n Symbol Table:\n");
+printf("Symbol \t\t addr \t\t type\n");
+--------------------------------------------------------\
+while(j<=n)
+{
+c=b[j];
+if(isalpha(toascii(c)))
+{
+p=malloc(c);
+add[x]=p;
+d[x]=c;
+printf("\n%c \t %p \t identifier\n",c,p);
+x++;
+j++;
+}
+else
+{
+ch=c;
+f(ch=='+'||ch=='-'||ch=='*'||ch=='=')
+{
+p=malloc(ch);
+add[x]=p;
+d[x]=ch;
+printf("\n %c \t %p \t operator\n",ch,p);
+x++;
+j++;
+}
+}
+}
+}S
