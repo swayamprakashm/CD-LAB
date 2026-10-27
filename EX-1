@@ -7,11 +7,9 @@ Step2: Define the structure of the Symbol Table
 Step3: Enter the choice for performing the operations in the symbol Table
 Step4: If the entered choice is 1, search the symbol table for the symbol to be inserted. If the symbol is
 the symbol table.
-Step5: If the entered choice is 2, the symbols present in the symbol table are displayed.
-Step6: If the entered choice is 3, the symbol to be deleted is searched in the symbol table.
-Step7:
+Step5: If the entered choice is 2, the symbols present in the symbol table are displayed. Step6: If the entered choice is 3, the symbol to be deleted is searched in the symbol table. Step7:
 Step8: If the entered choice is 5, the symbol to be modified is searched in the symbol table.
-PROGRAM CODE:
+
 //Implementation of symbol table
 #include<stdio.h>
 #include<ctype.h>
