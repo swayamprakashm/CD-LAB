@@ -1,0 +1,165 @@
+4.	Generate yacc specifications for a few syntactic categories.
+ 
+
+
+
+a)	program to recognize a valid arithmetic expression that uses operator +,-,*and /.
+Program name : arith_exp.l
+%{
+#include"y.tab.h" extern int yylval;
+%}
+/* defined section */
+%%
+[0-9]+ {yylval=atoi(yytext); return NUMBER;} [a-zA-Z]+ {return ID;}
+[\t]+ ;
+\n {return 0;}
+. {return yytext[0];}
+%%
+int yywrap()
+{
+return 1;
+}
+Program Name : arith_exp.y
+%{
+#include<stdio.h> #include<stdlib.h> int yylex();
+int yyerror(char *);
+%}
+//definition section
+%token NUMBER ID
+%left '+' '-'
+%left '*' '/'
+%%
+S:A'='expr|expr
+;
+expr: expr '+' expr
+|expr '-' expr
+|expr '*' expr
+|expr '/' expr
+|'-' NUMBER
+|'-' ID
+|'('expr')'
+|NUMBER
+|ID
+; A:ID
+;
+%%
+//main function int main()
+{
+printf("Enter the expression\n"); yyparse();
+printf("\nExpression is valid\n"); return 0;
+}
+ 
+
+
+
+//if error occured Int yyerror(char *s)
+{
+printf("\nExpression is invalid"); exit(0);
+}
+Output:
+ 
+b)	program to recognize a valid variable which starts with a letter followed by any number of letters or digits.
+Program name: var_test.l
+%{
+#include "y.tab.h"
+%}
+%%
+int	{return INT;} float {return FLOAT;}
+double {return DOUBLE;} char {return CHAR;}
+[a-zA-Z]+ {return ID;}
+";" {return SEM;}
+"," {return COM;}
+\n return 0;
+%%
+int yywrap()
+{
+return 1;
+}
+Program Name :var_test.y
+%{
+#include<stdio.h> int yylex();
+int yyerror(char*);
+%}
+%token ID INT FLOAT DOUBLE CHAR SEM COM
+%%
+ 
+
+
+
+D:T L SEM{ printf("valid variable");}
+;
+L:L COM ID
+|ID
+; T:INT
+|FLOAT
+|DOUBLE
+|CHAR
+;
+%%
+void main()
+{
+printf("enter a variable declaration statement"); yyparse();
+}
+int yyerror(char *s)
+{
+printf("Invalid declaration"); return 0;
+}
+Out put:
+ 
+c)	implementation of calculator using Lex and Yacc. Lex code: cal.lex
+%{
+#include <stdlib.h> #include "y.tab.h"
+%}
+%%
+[0-9]+ {yylval = atoi(yytext); return INTEGER;} [-+\n] return *yytext;
+[ \t]	; /* skip whitespace */
+%%
+int yywrap(void)
+ 
+	
+
+
+{
+return 1;
+}
+
+Yacc code: cal.yacc
+%{
+#include <stdio.h> int yylex(void);
+void yyerror(char *);
+%}
+%token INTEGER
+  -
+     
+%%
+program:
+program expr '\n'	{ printf("result:%d\n", $2); }
+|
+;
+expr: INTEGER	{ $$ = $1; }
+| expr '+' expr	{ $$ = $1 + $3; }
+| expr '-' expr	{ $$ = $1 - $3; }
+ 
+;
+%%
+void yyerror(char *s)
+{ fprintf(stderr, "%s\n", s);
+}
+int main(void)
+{
+printf("enter an Expression:"); yyparse();
+return 0;
+}
+
+Input:
+Enter an Expression:5+8 Out put:
+13.
+
+
+
+
+
+
+
+
+5.Program to Convert the BNF rules into Yacc form and write code to generate Abstract Syntax Tree
