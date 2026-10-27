@@ -1,0 +1,226 @@
+7.	Implement Any One Storage Allocation Strategies(Heap,Stack,Static) AIM: To implement Heap storage allocation strategy using C program. Algorithm:
+Step-1: define node structure for Heap storage allocation Step-2: perform operations on Heap storage:
+i)	Create operation
+ii)	Insert operation:
+a)	Insert at Head
+b)	Insert at end
+c)	Insert at after existed node
+iii)	Search operation
+iv)	Deletion a node from Heap storage
+Program Code: #include<stdio.h> #include<stdlib.h> #define TRUE 1
+#define FALSE 0 typedef struct Heap
+{
+int data;
+struct Heap *next;
+} node;
+node *head=NULL,*temp,*new1,*t; void create();
+void display(); node * search(int); node* insert(); void delete1(); void get_node(); int val;
+char ans,ch; int main()
+{
+int choice;
+ 
+
+
+
+do
+{
+printf("\n program to perform various operations on heap using Dynamic memory management"); printf("\n 1.create");
+printf("\n 2. Display");
+printf("\n 3.insert an element in a list"); printf("\n 4. Delete an element from the list"); printf("\n 5. Quit\n");
+printf("enter your choice (1-5):"); scanf("%d",&ch);
+switch (ch)
+{
+case 1: create();break;
+case 2: display();break;
+case 3: head=insert();break;
+case 4: delete1();break;
+case 5: exit(0); default:
+printf("Invalid choice, try again");
+}
+}
+while(choice!=5); return 0;
+}
+
+void create()
+{
+do
+{
+printf("enter the element:"); scanf("%d",&val); get_node(); if(new1==NULL)
+printf("\n memory is not allocated"); new1->data=val;
+if(head==NULL)
+{
+head=new1; temp=head;
+}
+else
+{
+temp->next=new1; temp=new1;
+}
+//flushall(); while(getchar()!='\n');
+printf("\n do you want to enter more elements?(y/n):");
+//ans=getchar(); scanf("%c",&ans);
+}
+while(ans=='y');
+printf("\n the list is created\n");
+ 
+
+
+
+}
+void get_node()
+{
+new1=(node*)malloc(sizeof(node)); new1->next=NULL;
+}
+void display()
+{
+temp=head;
+if (temp==NULL)
+{
+printf("\n the list is empty\n"); return ;
+}
+while(temp!=NULL)
+{
+printf("%d->",temp->data); temp=temp->next;
+}
+printf("NULL");
+}
+
+node* search(int key)
+{
+int found; temp=head; if(temp==NULL)
+{
+printf("the list is empty\n"); return NULL;
+}
+found=FALSE;
+while(temp!=NULL && found==FALSE)
+{
+if(temp->data!=key) temp=temp->next;
+else
+{
+found=TRUE;
+printf("\n the element is presented in the list"); return temp;
+}
+}
+if (found==FALSE)
+{
+printf("\n the element is not presented in the list"); return NULL;
+}
+return NULL;
+}
+node* insert()
+{
+int choice;
+ 
+
+
+
+node * insert_head(); void insert_after(); void insert_last();
+printf("\n 1. Insert a node as a head node"); printf("\n 2. Insert a node as a Last node");
+printf("\n 3. Insert a node at specified position in the list"); printf("\n enter your choice for insertion of a node:"); scanf("%d",&choice);
+switch(choice)
+{
+case 1: head=insert_head(); break; case 2: insert_last();break;
+case 3: insert_after(); break;
+}
+return head;
+}
+node* insert_head()
+{
+get_node();
+printf("\n enter the element "); scanf("%d",&new1->data); if(head==NULL)
+head=new1; else
+{
+temp=head;
+new1->next=temp; head=new1;
+}
+return head;
+}
+
+void insert_last()
+{
+get_node();
+printf("\n enter the element which you want to insert"); scanf("%d",&new1->data);
+if(head==NULL) head=new1;
+else
+{
+temp=head;
+while(temp->next!=NULL) temp=temp->next;
+temp->next=new1; new1->next=NULL;
+}
+}
+void insert_after()
+{
+int key; get_node();
+printf("\n enter the element");
+ 
+
+
+
+scanf("%d",&new1->data); if(head==NULL) head=new1;
+else
+{
+printf("\n After which node new node insert"); scanf("%d",&key);
+t=search(key); if(t!=NULL)
+{
+new1->next=t->next; t->next=new1;
+}
+else
+printf("%d can not insert in LIst",new1->data);
+}
+}
+
+node* get_prev(node *t)
+{
+node *prev; temp=head; if(temp==NULL) return NULL; while(temp!=t)
+{
+prev=temp; temp=temp->next;
+}
+return prev;
+}
+
+void delete1()
+{
+node *prev; int key;
+if (head==NULL)
+{
+printf("\n the list is empty"); return;
+}
+printf("\n enter the element you want to delete"); scanf("%d",&key);
+t=search(key); if(t!=NULL)
+{
+prev=get_prev(t); if(prev!=NULL)
+{
+prev->next=t->next; free(t);
+}
+else
+ 
+
+
+
+{
+head=temp->next; free(temp);
+}
+printf("\n the element is deleted");
+}
+}
+Input & Out put:
+program to perform various operations on heap using Dynamic memory management");
+1.	create
+2.	Display
+3.	insert an element in a list
+4.	Delete an element from the list
+5.	Quit
+enter your choice (1-5):1 enter a element :6
+do you want more elements(y/n):y enter a element:9
+do you want more elements(y/n):n
+1.	create
+2.	Display
+3.	insert an element in a list
+4.	Delete an element from the list
+5.	Quit
+enter your choice (1-5):2 elements in storage: 6->9->NULL
+1.	create
+2.	Display
+3.	insert an element in a list
+4.	Delete an element from the list
+5.	Quit
+enter your choice (1-5):5
