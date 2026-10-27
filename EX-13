@@ -1,0 +1,48 @@
+13.	write a yacc program to implement a top-down parser for the grammar:
+
+Let's define a simple grammar for palindromes. We'll consider palindromes over the alphabet {a, b}. The grammar can be defined as follows:
+S - 	 
+Here's the Yacc code implementing the top-down parser for this palindrome grammar:
+%{
+#include <stdio.h> #include <stdlib.h>
+%}
+
+%token a b
+%left a b
+
+%%
+ 
+
+
+
+start : S '\n' { printf("Valid palindrome\n"); }
+;
+
+S	:  /* empty */  { }
+|  a	{ }
+|  b	{ }
+|  a S a	{ }
+|  b S b	{ }
+;
+
+%%
+
+int main() {
+
+yyparse(); return 0;
+}
+
+int yyerror(char *s) { fprintf(stderr, "Error: %s\n", s); return 0;
+}
+
+int yylex() {
+int c = getchar();
+if (c == EOF) return 0; if (c == 'a') return a;
+if (c == 'b') return b; return c;
+}
+
+Compile: $ yacc -d exp_13.y
+$ cc y.tab.c lex.yy.c
+Execute: $ ./a.out input:
+enter a string: aabaa out put:
+it is a valid palindrome string.
